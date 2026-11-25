@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estudo — pare de perder tempo decidindo o que estudar</title>
+<meta name="description" content="Organize sua rotina de estudo em 5 minutos por dia. Tarefas por matéria, cronômetro de foco e progresso visível. Comece grátis.">
+<style>
+:root{
+  --bg:#0b0f13; --panel:#131920; --panel2:#1b232c; --line:#28323d;
+  --txt:#e8eef5; --dim:#8b97a5; --acc:#4dd1a1; --acc2:#3aa7f0; --r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--txt);
+  font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+header{display:flex;align-items:center;gap:12px;padding:20px 0}
+.logo{font-weight:700;font-size:19px;letter-spacing:.4px}
+.logo b{color:var(--acc)}
+header .spacer{flex:1}
+a.btn,button.btn{
+  display:inline-block;text-decoration:none;font:inherit;font-weight:600;cursor:pointer;
+  background:var(--acc);color:#07130f;border:1px solid var(--acc);
+  padding:12px 22px;border-radius:11px;transition:.15s;
+}
+a.btn:hover,button.btn:hover{filter:brightness(1.08)}
+a.btn.ghost{background:transparent;color:var(--txt);border-color:var(--line);font-weight:500}
+a.btn.ghost:hover{border-color:var(--acc);color:var(--acc)}
+.hero{padding:56px 0 48px;text-align:center}
+.eyebrow{color:var(--acc);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+h1{font-size:clamp(30px,5.2vw,52px);line-height:1.1;margin:0 0 18px;letter-spacing:-.02em}
+h1 em{color:var(--acc);font-style:normal}
+.lead{font-size:clamp(16px,2.2vw,19px);color:var(--dim);max-width:620px;margin:0 auto 30px}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.note{font-size:13px;color:var(--dim);margin-top:14px}
+section{padding:44px 0}
+h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 8px;letter-spacing:-.01em}
+.sub{color:var(--dim);margin:0 0 30px;max-width:600px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r);padding:22px;
+}
+.card .ico{font-size:22px;margin-bottom:10px}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0;color:var(--dim);font-size:14.5px}
+.steps{counter-reset:s;display:grid;gap:14px}
+.step{
+  display:flex;gap:16px;align-items:flex-start;
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px;
+}
+.step .num{
+  flex:0 0 34px;height:34px;border-radius:50%;background:var(--acc);
+  color:#07130f;font-weight:700;display:grid;place-items:center;font-size:15px;
+}
+.step h3{margin:0 0 4px;font-size:16.5px}
+.step p{margin:0;color:var(--dim);font-size:14.5px}
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;align-items:stretch}
+.plan{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r);padding:26px;display:flex;flex-direction:column;
+}
+.plan.featured{border-color:var(--acc);position:relative;background:linear-gradient(180deg,rgba(77,209,161,.06),var(--panel))}
+.plan.featured::after{
+  content:"MAIS ESCOLHIDO";position:absolute;top:-11px;left:26px;
+  background:var(--acc);color:#07130f;font-size:10.5px;font-weight:700;
+  letter-spacing:.1em;padding:4px 10px;border-radius:999px;
+}
+.plan .name{font-size:15px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.plan .price{font-size:38px;font-weight:700;margin:8px 0 2px;letter-spacing:-.02em}
+.plan .price span{font-size:15px;font-weight:400;color:var(--dim)}
+.plan ul{list-style:none;padding:0;margin:18px 0 24px;display:grid;gap:9px;font-size:14.5px}
+.plan li{display:flex;gap:9px;color:var(--txt)}
+.plan li::before{content:"✓";color:var(--acc);font-weight:700}
+.plan li.off{color:var(--dim)}
+.plan li.off::before{content:"—";color:var(--dim)}
+.plan .btn{margin-top:auto;text-align:center}
+.faq{display:grid;gap:10px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:16px 18px}
+details summary{cursor:pointer;font-weight:600;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";float:right;color:var(--acc);font-weight:700}
+details[open] summary::after{content:"–"}
+details p{margin:12px 0 0;color:var(--dim);font-size:14.5px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--dim);font-size:13px;text-align:center}
+footer a{color:var(--dim)}
+.banner{
+  background:linear-gradient(90deg,rgba(77,209,161,.12),rgba(58,167,240,.12));
+  border:1px solid var(--line);border-radius:var(--r);
+  padding:26px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+}
+.banner h3{margin:0 0 4px;font-size:19px}
+.banner p{margin:0;color:var(--dim);font-size:14.5px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo"><b>Estudo</b> · rotina</div>
+    <div class="spacer"></div>
+    <a class="btn ghost" href="./index.html">Abrir o app</a>
+  </header>
+</div>
+
+<div class="wrap hero">
+  <div class="eyebrow">Rotina de estudo, sem desculpa</div>
+  <h1>Pare de perder tempo decidindo <em>o que estudar</em>.</h1>
+  <p class="lead">Abra o app, veja o que é de hoje, senta e estuda. Matérias, tarefas, cronômetro de foco e progresso — tudo em um lugar, sincronizado no celular e no PC.</p>
+  <div class="cta-row">
+    <a class="btn" href="./index.html">Começar grátis</a>
+    <a class="btn ghost" href="#planos">Ver planos</a>
+  </div>
+  <p class="note">Sem cartão. Sem instalação. Funciona no navegador.</p>
+</div>
+
+<div class="wrap">
+  <section>
+    <h2>O problema não é falta de material.</h2>
+    <p class="sub">É abrir a apostila e não saber por onde começar. O Estudo resolve a parte chata: decidir, organizar e lembrar.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">📌</div>
+        <h3>Hoje, não "algum dia"</h3>
+        <p>Uma lista curta do que é de hoje. Sem parede de tarefas, sem culpa.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🎯</div>
+        <h3>Foco com cronômetro</h3>
+        <p>Ciclos de foco e pausa. Cada minuto conta no seu progresso.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📈</div>
+        <h3>Progresso visível</h3>
+        <p>Minutos studados, dias seguidos, % por matéria. O que não se vê, não melhora.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔄</div>
+        <h3>No celular e no PC</h3>
+        <p>Conta grátis e sincronização. Continua de onde parou, em qualquer aparelho.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🎧</div>
+        <h3>Som que ajuda a focar</h3>
+        <p>Chuva, café, ruído marrom. Gerado no navegador, toca offline, sem anúncio.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🎬</div>
+        <h3>Aulas no mesmo lugar</h3>
+        <p>Salve vídeos por matéria e assista sem sair da rotina. Busca rápida no YouTube.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Começa em três passos.</h2>
+    <p class="sub">Leva menos que um vídeo de motivação.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div><h3>Cria as matérias</h3><p>Matemática, História, o que for. Cada uma com cor.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h3>Adiciona uma tarefa de hoje</h3><p>"Revisar funções — 30 min às 19h". Curto e concreto.</p></div></div>
+      <div class="step"><div class="num">3</div><div><h3>Aperta iniciar e senta</h3><p>O cronômetro cuida do resto. Você só estuda.</p></div></div>
+    </div>
+  </section>
+
+  <section id="planos">
+    <h2>Preço de um café por semana.</h2>
+    <p class="sub">Comece grátis. Pague só se quiser sincronizar e guardar histórico.</p>
+    <div class="pricing">
+      <div class="plan">
+        <div class="name">Grátis</div>
+        <div class="price">R$ 0</div>
+        <ul>
+          <li>Tarefas e matérias ilimitadas</li>
+          <li>Cronômetro de foco</li>
+          <li>Progresso do dia</li>
+          <li class="off">Sincronização entre aparelhos</li>
+          <li class="off">Histórico completo</li>
+        </ul>
+        <a class="btn ghost" href="./index.html">Usar grátis</a>
+      </div>
+      <div class="plan featured">
+        <div class="name">Pro</div>
+        <div class="price">R$ 19<span>,90/mês</span></div>
+        <ul>
+          <li>Tudo do grátis</li>
+          <li>Sincroniza celular + PC</li>
+          <li>Histórico e sequência completos</li>
+          <li>Backup na nuvem</li>
+          <li>Suporte direto</li>
+        </ul>
+        <!-- TROQUE o href pelo seu link de checkout (Kiwify / Mercado Pago / Hotmart) -->
+        <a class="btn" href="COLE_AQUI_SEU_LINK_DE_CHECKOUT">Assinar Pro</a>
+      </div>
+    </div>
+    <p class="note">Anual sai R$ 97 — dois meses de graça. Cancele quando quiser.</p>
+  </section>
+
+  <section>
+    <div class="banner">
+      <div>
+        <h3>Não sabe se é pra você?</h3>
+        <p>Usa de graça por uma semana. Se não mudar nada na sua rotina, não paga nada.</p>
+      </div>
+      <a class="btn" href="./index.html">Testar agora</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Perguntas diretas.</h2>
+    <div class="faq">
+      <details><summary>Preciso instalar algo?</summary><p>Não. Abre no navegador. No celular dá pra adicionar à tela inicial e vira um app.</p></details>
+      <details><summary>Funciona offline?</summary><p>Sim. Sem internet, tudo fica salvo no aparelho. Quando volta, sincroniza.</p></details>
+      <details><summary>Perco meus dados se cancelar?</summary><p>Não. Você pode exportar tudo em JSON a qualquer momento.</p></details>
+      <details><summary>Serve pra concurso, ENEM, faculdade?</summary><p>Serve pra qualquer rotina com matérias e tarefas. O formato é o mesmo.</p></details>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    Estudo · organizador de rotina — <a href="./index.html">abrir o app</a>
+  </div>
+</footer>
+
+</body>
+</html>
